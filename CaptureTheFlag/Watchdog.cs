@@ -20,6 +20,7 @@ namespace CaptureTheFlag
         public static void startObserving()
         {
             initSetting();
+            Thread.Sleep(5000);
             while (true)
             {
                 if (isWindowMatched(getForegroundWindowName()))
