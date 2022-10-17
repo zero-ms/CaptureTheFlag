@@ -79,8 +79,15 @@ namespace CaptureTheFlag
 
         private static async void saveCapturedFile(Bitmap screenBitmap, int monitor)
         {
-            screenBitmap.Save(combineSavePath(1));
-            screenBitmap.Dispose();
+            try
+            {
+                screenBitmap.Save(combineSavePath(1));
+                screenBitmap.Dispose();
+            }
+            catch
+            {
+
+            }
         }
 
         private static string combineSavePath(int monitor)

@@ -24,6 +24,7 @@ namespace CaptureTheFlag
             {
                 if (isWindowMatched(getForegroundWindowName()))
                 {
+                    Timeout.triggerTimeout();
                     Console.WriteLine("[DEBUG] Screen Saved!");
                     ScreenCapture.doCaptureAndSave();
                 }
@@ -33,24 +34,34 @@ namespace CaptureTheFlag
 
         private static void initSetting()
         {
+            ProcessManager.terminateProcess("fifa4launcher");
+            ProcessManager.terminateProcess("fifa4zf");
+            ProcessManager.terminateProcess("BlackCipher64.aes");
             initSaveDirectory();
         }
 
         private static void initSaveDirectory()
         {
-            DirectoryInfo saveDirectory = new DirectoryInfo(Variables.getSavePath());
-            if (!saveDirectory.Exists)
+            try
             {
-                saveDirectory.Create();
-            }
-
-            for (int i = 1; i <= Variables.getMonitorCount(); i++)
-            {
-                saveDirectory = new DirectoryInfo(Variables.getSavePath() + "\\" + i);
+                DirectoryInfo saveDirectory = new DirectoryInfo(Variables.getSavePath());
                 if (!saveDirectory.Exists)
                 {
                     saveDirectory.Create();
                 }
+
+                for (int i = 1; i <= Variables.getMonitorCount(); i++)
+                {
+                    saveDirectory = new DirectoryInfo(Variables.getSavePath() + "\\" + i);
+                    if (!saveDirectory.Exists)
+                    {
+                        saveDirectory.Create();
+                    }
+                }
+            } catch (Exception ex)
+            {
+                Logger.sendError("[ERROR] initSaveDirectory");
+                Logger.sendError(ex.Message);
             }
         }
 
@@ -72,7 +83,7 @@ namespace CaptureTheFlag
 
         public static Boolean isWindowMatched(string windowName)
         {
-            if (windowName.Contains(Variables.getObservingWindowName()))
+            if (windowName.Equals(Variables.getObservingWindowName()))
             {
                 return true;
             }

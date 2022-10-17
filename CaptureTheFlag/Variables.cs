@@ -9,11 +9,12 @@ namespace CaptureTheFlag
 {
     internal class Variables
     {
-        private static string observingWindowName = "계산기";
-        private static string savePath = Environment.ExpandEnvironmentVariables("%userprofile%\\savedCapture");
-        private static int monitorCount = SystemInformation.MonitorCount;
-        private static int checkDelayTime = 100;
+        private static readonly string observingWindowName = "FIFA ONLINE 4";
+        private static readonly string savePath = Environment.ExpandEnvironmentVariables("%public%\\savedCapture");
+        private static readonly int monitorCount = SystemInformation.MonitorCount;
+        private static readonly int checkDelayTime = 200;
         private static bool doCaptureCursor = true;
+        private static readonly int timeOutSeoncds = 100;
 
         public static string getObservingWindowName()
         {
@@ -38,6 +39,11 @@ namespace CaptureTheFlag
         public static bool getCaptureCursor()
         {
             return doCaptureCursor;
+        }
+
+        public static int getTimeOutSeconds()
+        {
+            return timeOutSeoncds;
         }
     }
 }
