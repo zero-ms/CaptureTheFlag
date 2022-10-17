@@ -84,10 +84,7 @@ namespace CaptureTheFlag
                 screenBitmap.Save(combineSavePath(1));
                 screenBitmap.Dispose();
             }
-            catch
-            {
-
-            }
+            catch { }
         }
 
         private static string combineSavePath(int monitor)

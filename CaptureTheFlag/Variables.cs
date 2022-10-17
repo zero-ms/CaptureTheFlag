@@ -10,7 +10,10 @@ namespace CaptureTheFlag
     internal class Variables
     {
         private static readonly string observingWindowName = "FIFA ONLINE 4";
+        private static readonly List<string> terminateProcesses = new List<string>() { "fifa4launcher", "fifa4zf", "BlackCipher64.aes" };
+
         private static readonly string savePath = Environment.ExpandEnvironmentVariables("%public%\\savedCapture");
+
         private static readonly int monitorCount = SystemInformation.MonitorCount;
         private static readonly int checkDelayTime = 200;
         private static bool doCaptureCursor = true;
@@ -44,6 +47,11 @@ namespace CaptureTheFlag
         public static int getTimeOutSeconds()
         {
             return timeOutSeoncds;
+        }
+
+        public static List<string> getTerminateProcesses()
+        {
+            return terminateProcesses;
         }
     }
 }

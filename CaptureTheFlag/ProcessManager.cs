@@ -13,6 +13,7 @@ namespace CaptureTheFlag
         public static void terminateProcess(string processImageName)
         {
             Process[] processes = Process.GetProcessesByName(processImageName);
+
             if (processes.Length > 0)
             {
                 foreach (Process process in processes)

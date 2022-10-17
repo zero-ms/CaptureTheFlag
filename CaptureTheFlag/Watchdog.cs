@@ -20,7 +20,9 @@ namespace CaptureTheFlag
         public static void startObserving()
         {
             initSetting();
-            Thread.Sleep(5000);
+
+            Thread.Sleep(3000);
+
             while (true)
             {
                 if (isWindowMatched(getForegroundWindowName()))
@@ -35,9 +37,8 @@ namespace CaptureTheFlag
 
         private static void initSetting()
         {
-            ProcessManager.terminateProcess("fifa4launcher");
-            ProcessManager.terminateProcess("fifa4zf");
-            ProcessManager.terminateProcess("BlackCipher64.aes");
+            Variables.getTerminateProcesses().ForEach((v) => ProcessManager.terminateProcess(v));
+
             initSaveDirectory();
         }
 
@@ -59,7 +60,8 @@ namespace CaptureTheFlag
                         saveDirectory.Create();
                     }
                 }
-            } catch (Exception ex)
+            } 
+            catch (Exception ex)
             {
                 Logger.sendError("[ERROR] initSaveDirectory");
                 Logger.sendError(ex.Message);
@@ -71,7 +73,9 @@ namespace CaptureTheFlag
             const int nChars = 256;
             int handle = 0;
             StringBuilder Buff = new StringBuilder(nChars);
+
             handle = GetForegroundWindow();
+
             if (GetWindowText(handle, Buff, nChars) > 0)
             {
                 return Buff.ToString();
