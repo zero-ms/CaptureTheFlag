@@ -39,19 +39,19 @@ namespace CaptureTheFlag
         {
             for (int i = 1; i <= Variables.getMonitorCount(); i++)
             {
-                Bitmap screenBitmap = doScreenCapture(Variables.getCaptureCursor());
+                Bitmap screenBitmap = doScreenCapture(Variables.getCaptureCursor(), i);
                 saveCapturedFile(screenBitmap, i);
             }
         }
-        private static Bitmap doScreenCapture(bool CaptureMouse)
+        private static Bitmap doScreenCapture(bool CaptureMouse, int monitor)
         {
-            Bitmap result = new Bitmap(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height, PixelFormat.Format24bppRgb);
+            Bitmap result = new Bitmap(Screen.AllScreens[monitor - 1].Bounds.Width, Screen.AllScreens[monitor - 1].Bounds.Height, PixelFormat.Format24bppRgb);
 
             try
             {
                 using (Graphics g = Graphics.FromImage(result))
                 {
-                    g.CopyFromScreen(0, 0, 0, 0, Screen.PrimaryScreen.Bounds.Size, CopyPixelOperation.SourceCopy);
+                    g.CopyFromScreen(0, 0, 0, 0, Screen.AllScreens[monitor - 1].Bounds.Size, CopyPixelOperation.SourceCopy);
 
                     if (CaptureMouse)
                     {
@@ -81,7 +81,7 @@ namespace CaptureTheFlag
         {
             try
             {
-                screenBitmap.Save(combineSavePath(1));
+                screenBitmap.Save(combineSavePath(monitor));
                 screenBitmap.Dispose();
             }
             catch { }
