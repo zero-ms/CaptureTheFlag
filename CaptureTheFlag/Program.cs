@@ -16,6 +16,7 @@ namespace CaptureTheFlag
     {
         static void Main()
         {
+            Logger.sendInfo("[LOG] Start observing!");
             Watchdog.startObserving();
         }
     }

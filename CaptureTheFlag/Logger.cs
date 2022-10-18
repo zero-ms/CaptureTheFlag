@@ -23,6 +23,7 @@ namespace CaptureTheFlag
             if (isCoolTime())
             {
                 Thread.Sleep((int)getRemainingCoolTime());
+                lastSendUnixTime = Util.getUnixTime();
             }
             try
             {
@@ -31,7 +32,31 @@ namespace CaptureTheFlag
                 {
                 { "content", msg },
                 { "username", "Logger-Error" },
-                { "avatar_url", "https://www.freeiconspng.com/thumbs/error-icon/error-icon-32.png" }
+                { "avatar_url", "https://w7.pngwing.com/pngs/595/505/png-transparent-computer-icons-error-closeup-miscellaneous-text-logo.png" }
+                };
+                client.PostAsync(discordHookURL, new FormUrlEncodedContent(contents)).GetAwaiter().GetResult();
+            }
+            catch
+            {
+                Console.WriteLine("[DEBUG] Logging-Error Error!");
+            }
+        }
+
+        public static void sendInfo(string msg)
+        {
+            if (isCoolTime())
+            {
+                Thread.Sleep((int)getRemainingCoolTime());
+                lastSendUnixTime = Util.getUnixTime();
+            }
+            try
+            {
+                HttpClient client = new HttpClient();
+                Dictionary<string, string> contents = new Dictionary<string, string>
+                {
+                { "content", msg },
+                { "username", "Logger-Info" },
+                { "avatar_url", "https://e7.pngegg.com/pngimages/783/960/png-clipart-japanese-industrial-standards-logo-technical-standard-industry-info-ico-emblem-text-thumbnail.png" }
                 };
                 client.PostAsync(discordHookURL, new FormUrlEncodedContent(contents)).GetAwaiter().GetResult();
             }
