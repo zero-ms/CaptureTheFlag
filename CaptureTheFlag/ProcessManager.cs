@@ -21,6 +21,11 @@ namespace CaptureTheFlag
                     process.Kill();
                 }
             }
+            else
+            {
+                Logger.sendError("[ERROR] Cannot find process");
+                Logger.sendError("[ERROR] processImageName: " + processImageName);
+            }
         }
     }
 }

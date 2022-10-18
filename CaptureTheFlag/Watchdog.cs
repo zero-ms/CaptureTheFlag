@@ -64,7 +64,7 @@ namespace CaptureTheFlag
             catch (Exception ex)
             {
                 Logger.sendError("[ERROR] initSaveDirectory");
-                Logger.sendError(ex.Message);
+                Logger.sendError("[ERROR] Exception: " + ex.Message);
             }
         }
 
